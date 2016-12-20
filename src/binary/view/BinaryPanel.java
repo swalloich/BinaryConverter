@@ -2,20 +2,27 @@ package binary.view;
 
 import java.awt.event.*;
 import javax.swing.*;
+import binary.controller.BinaryController;
+import binary.model.Binary;
 
 public class BinaryPanel extends JPanel
 {
 	private JButton convertButton;
 	private JTextField binaryField;
-	private JTextArea converted;
+	public JTextArea converted;
 	private SpringLayout baseLayout;
+	private Binary binary;
+	private BinaryController baseController;
 	
 	public BinaryPanel()
 	{
-		convertButton = new JButton("Convert");
-		binaryField = new JTextField("Enter binary here.");
-		converted = new JTextArea(15, 36);
+		super();
+		this.convertButton = new JButton("Convert");
+		this.binaryField = new JTextField("Enter binary here.");
+		this.converted = new JTextArea(15, 36);
 		baseLayout = new SpringLayout();
+		binary = new Binary();
+		baseController = new BinaryController();
 		
 		setupPanel();
 		setupLayout();
@@ -50,6 +57,8 @@ public class BinaryPanel extends JPanel
 			public void actionPerformed(ActionEvent enter)
 			{
 				String input = binaryField.getText();
+				binary.convertToBinary(input);
+				
 			}
 		});
 		convertButton.addActionListener(new ActionListener()
@@ -57,6 +66,7 @@ public class BinaryPanel extends JPanel
 			public void actionPerformed(ActionEvent clicked)
 			{
 				String input = binaryField.getText();
+				binary.convertToBinary(input);
 			}
 		});
 	}

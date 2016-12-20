@@ -8,10 +8,14 @@ import binary.controller.BinaryController;
 
 public class BinaryFrame extends JFrame
 {
+	private BinaryController baseController;
 	private BinaryPanel basePanel;
 	
 	public BinaryFrame(BinaryController baseController)
 	{
+		super();
+		this.baseController = baseController;
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		basePanel = new BinaryPanel();
 		
 		setupFrame();
