@@ -1,32 +1,27 @@
 package binary.model;
 
-import java.util.ArrayList;
-
-import binary.view.BinaryPanel;
-
+import java.nio.charset.StandardCharsets;
 
 public class Binary 
 {
-	public ArrayList<String> alphabetList;
-	private BinaryPanel basePanel;
-	
 	public Binary()
 	{
-		alphabetList = new ArrayList<String>();
-		basePanel = new BinaryPanel();
 		
-
 	}
 	
-	public void convertToBinary(String currentInput)
+	public String convertToBinary(String currentInput, String output)
 	{
-			if(currentInput.contains("1") || currentInput.contains("0"))
-			{
-				if(currentInput.equalsIgnoreCase("01100001"));
-				{
-					basePanel.converted.setText("a");
-				}
-			}
+		for()
+		StandardCharsets.US_ASCII.encode(currentInput.getChars(1, 1, , 1));
+		if(!binaryChecker(currentInput))
+		{
+			String hex;
+			
+			hex = Integer.toBinaryString(Integer.parseInt(currentInput,16));
+			output = hex;
+		}
+		
+		return output;
 	}
 	
 	private boolean binaryChecker(String input)
@@ -35,40 +30,13 @@ public class Binary
 		
 		if(input.contains("1") || input.contains("0"))
 		{
-			for(int pos = 0; pos <)
-				if(input.contains())
+			isBinary = true;
+				if(!input.contains("1") && !input.contains("0"))
+				{
+					isBinary = false;
+				}
 		}
 		
 		return isBinary;
-	}
-	
-	private void buildAplhabetList()
-	{
-		alphabetList.add("a");
-		alphabetList.add("b");
-		alphabetList.add("c");
-		alphabetList.add("d");
-		alphabetList.add("d");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
-		alphabetList.add("");
 	}
 }

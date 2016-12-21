@@ -1,8 +1,6 @@
 package binary.controller;
 
-import binary.model.Binary;
 import binary.view.BinaryFrame;
-import binary.view.BinaryPanel;
 
 public class BinaryController 
 {
