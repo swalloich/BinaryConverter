@@ -66,7 +66,7 @@ public class BinaryPanel extends JPanel
 			public void actionPerformed(ActionEvent enter)
 			{
 				String input = binaryField.getText();
-				if(binary.binaryChecker(input))
+				if(!binary.binaryChecker(input))
 				{
 					converted.setText(binary.convertToBinary(input, input));
 				}
@@ -82,7 +82,7 @@ public class BinaryPanel extends JPanel
 			public void actionPerformed(ActionEvent clicked)
 			{
 				String input = binaryField.getText();
-				if(binary.binaryChecker(input))
+				if(!binary.binaryChecker(input))
 				{
 					converted.setText(binary.convertToBinary(input, input));
 				}
