@@ -1,7 +1,5 @@
 package binary.model;
 
-import java.nio.charset.StandardCharsets;
-
 public class Binary 
 {
 	public Binary()
@@ -11,14 +9,21 @@ public class Binary
 	
 	public String convertToBinary(String currentInput, String output)
 	{
-		for()
-		StandardCharsets.US_ASCII.encode(currentInput.getChars(1, 1, , 1));
 		if(!binaryChecker(currentInput))
 		{
-			String hex;
-			
-			hex = Integer.toBinaryString(Integer.parseInt(currentInput,16));
-			output = hex;
+			byte[] bytes = currentInput.getBytes();
+			StringBuilder binary = new StringBuilder();
+			for(byte length : bytes)
+			{
+				int val = length;
+				for(int i = 0; i < 8; i++)
+				{
+					binary.append((val & 128) == 0 ? 0 : 1);
+					val <<= 1;
+				}
+				binary.append(' ');
+			}
+			output = binary.toString();
 		}
 		
 		return output;

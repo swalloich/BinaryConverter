@@ -28,6 +28,7 @@ public class BinaryPanel extends JPanel
 		setupPanel();
 		setupLayout();
 		setupListeners();
+		setConvertedProperties();
 	}
 	
 	private void setupPanel()
@@ -49,6 +50,13 @@ public class BinaryPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, converted, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, converted, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, converted, -10, SpringLayout.EAST, this);
+	}
+	
+	private void setConvertedProperties()
+	{
+		converted.setWrapStyleWord(true);
+		converted.setLineWrap(true);
+		converted.setRows(5);
 	}
 	
 	private void setupListeners()
