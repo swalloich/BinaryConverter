@@ -29,11 +29,21 @@ public class Binary
 		return output;
 	}
 	
-	private boolean binaryChecker(String input)
+	public String convertFromBinary(String currentInput, String output)
+	{
+		if(binaryChecker(currentInput))
+		{
+			
+		}
+		
+		return output;
+	}
+	
+	public boolean binaryChecker(String input)
 	{
 		boolean isBinary = false;
 		
-		if(input.contains("1") || input.contains("0"))
+		if(input.contains("1") || input.contains("0") && !input.matches("[a-zA-Z]+"))
 		{
 			isBinary = true;
 				if(!input.contains("1") && !input.contains("0"))
