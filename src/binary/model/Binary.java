@@ -33,7 +33,14 @@ public class Binary
 	{
 		if(binaryChecker(currentInput))
 		{
-			
+			System.out.println("binaryChecker success");
+			String[] binary = currentInput.split( " " );
+			StringBuilder converted = new StringBuilder();
+			for(int length = 0; length < binary.length; length++)
+			{
+				converted.append( (char)Integer.parseInt( binary[length], 2) );
+			}
+			output = converted.toString();
 		}
 		
 		return output;
@@ -41,16 +48,26 @@ public class Binary
 	
 	public boolean binaryChecker(String input)
 	{
-		boolean isBinary = false;
-		
-		if(input.contains("1") || input.contains("0") && !input.matches("[a-zA-Z]+"))
-		{
-			isBinary = true;
-				if(!input.contains("1") && !input.contains("0"))
-				{
-					isBinary = false;
-				}
+		boolean isBinary = true;
+		for(int index = 0; index < input.length(); index++){
+			if(input.substring(index, index+1).equals("0")||input.substring(index, index+1).equals("1")||input.substring(index, index+1).equals(" "))
+			{
+				
+			}
+			else
+			{
+				isBinary = false;
+			}
 		}
+		
+//		if(input.contains("1") || input.contains("0") && !input.matches("[a-zA-Z]+"))
+//		{
+//			isBinary = true;
+//				if(!input.contains("1") && !input.contains("0"))
+//				{
+//					isBinary = false;
+//				}
+//		}
 		
 		return isBinary;
 	}
