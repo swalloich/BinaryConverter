@@ -33,7 +33,6 @@ public class Binary
 	{
 		if(binaryChecker(currentInput))
 		{
-			System.out.println("binaryChecker success");
 			String[] binary = currentInput.split( " " );
 			StringBuilder converted = new StringBuilder();
 			for(int length = 0; length < binary.length; length++)
