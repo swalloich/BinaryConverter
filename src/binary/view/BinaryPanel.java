@@ -18,7 +18,7 @@ public class BinaryPanel extends JPanel
 	{
 		super();
 		this.convertButton = new JButton("Convert");
-		this.binaryField = new JTextField("Enter binary here.");
+		this.binaryField = new JTextField("Enter input here");
 		this.converted = new JTextArea(15, 36);
 		
 		baseLayout = new SpringLayout();
@@ -57,6 +57,7 @@ public class BinaryPanel extends JPanel
 		converted.setWrapStyleWord(true);
 		converted.setLineWrap(true);
 		converted.setRows(5);
+		converted.setEditable(false);
 	}
 	
 	private void setupListeners()
@@ -66,7 +67,14 @@ public class BinaryPanel extends JPanel
 			public void actionPerformed(ActionEvent enter)
 			{
 				String input = binaryField.getText();
-				converted.setText(binary.convertToBinary(input, input));
+				if(!binary.binaryChecker(input))
+				{
+					converted.setText(binary.convertToBinary(input, input));
+				}
+				else
+				{
+					converted.setText(binary.convertFromBinary(input, input));
+				}
 				
 			}
 		});
@@ -75,8 +83,15 @@ public class BinaryPanel extends JPanel
 			public void actionPerformed(ActionEvent clicked)
 			{
 				String input = binaryField.getText();
-				converted.append(binary.convertToBinary(input, input));
-			}
+					if(!binary.binaryChecker(input))
+					{
+						converted.setText(binary.convertToBinary(input, input));
+					}
+					else
+					{
+						converted.setText(binary.convertFromBinary(input, input));
+					}
+				}
 		});
 	}
 }
