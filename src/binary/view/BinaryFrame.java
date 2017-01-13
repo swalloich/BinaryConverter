@@ -26,7 +26,8 @@ public class BinaryFrame extends JFrame
 	{
 		this.setContentPane(basePanel);
 		this.setTitle("Binary Converter");
-		this.setSize(new Dimension(500, 500));
+		this.setSize(new Dimension(750, 500));
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 }
