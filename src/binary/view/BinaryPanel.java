@@ -15,26 +15,22 @@ public class BinaryPanel extends JPanel
 	private JLabel out;
 	private SpringLayout baseLayout;
 	private Binary binary;
-	private BinaryController baseController;
-	
 	public BinaryPanel(BinaryController baseController)
 	{
 		super();
 		this.convertButton = new JButton("Convert");
 //		this.binaryField = new JTextField("Enter input here");
-		this.toBeConverted = new JTextArea(15, 15);
+		this.toBeConverted = new JTextArea();
 		this.converted = new JTextArea();
 		this.in = new JLabel("Input");
 		this.out = new JLabel("Output");
-		this.baseController = baseController;
-		
 		baseLayout = new SpringLayout();
 		binary = new Binary();
 		
 		setupPanel();
 		setupLayout();
 		setupListeners();
-		setTextAreaProperties();
+		setTextFieldProperties();
 	}
 	
 	private void setupPanel()
@@ -67,17 +63,17 @@ public class BinaryPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, in, 0, SpringLayout.EAST, toBeConverted);
 		baseLayout.putConstraint(SpringLayout.SOUTH, out, -6, SpringLayout.NORTH, converted);
 		baseLayout.putConstraint(SpringLayout.SOUTH, in, -6, SpringLayout.NORTH, toBeConverted);
-		out.setHorizontalAlignment(SwingConstants.CENTER);
-		in.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	
-	private void setTextAreaProperties()
+	private void setTextFieldProperties()
 	{
 		converted.setWrapStyleWord(true);
 		converted.setLineWrap(true);
 		converted.setEditable(false);
 		toBeConverted.setWrapStyleWord(true);
 		toBeConverted.setLineWrap(true);
+		out.setHorizontalAlignment(SwingConstants.CENTER);
+		in.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	
 	private void setupListeners()
@@ -96,36 +92,36 @@ public class BinaryPanel extends JPanel
 //				}
 //				
 //			}
-//		
-//			toBeConverted.addKeyListener(new KeyListener()
-//			{
-//			public void keyTyped(KeyEvent e)
-//			{
-//				
-//			}
-//
-//			@Override
-//			public void keyPressed(KeyEvent e)
-//			{
-//				if(e.getKeyCode()==KeyEvent.VK_ENTER)
-//				{
-//					String input = toBeConverted.getText();
-//					if(!binary.binaryChecker(input))
-//					{
-//						converted.setText(binary.convertToBinary(input, input));
-//					}
-//					else
-//					{
-//						converted.setText(binary.convertFromBinary(input, input));
-//					}
-//				}
-//			}
-//
-//			public void keyReleased(KeyEvent e)
-//			{
-//				
-//			}
-//		});
+		
+		toBeConverted.addKeyListener(new KeyListener()
+		{
+			public void keyTyped(KeyEvent e)
+			{
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e)
+			{
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+				{
+					String input = toBeConverted.getText();
+					if(!binary.binaryChecker(input))
+					{
+						converted.setText(binary.convertToBinary(input, input));
+					}
+					else
+					{
+						converted.setText(binary.convertFromBinary(input, input));
+					}
+				}
+			}
+
+			public void keyReleased(KeyEvent e)
+			{
+				
+			}
+		});
 		
 		convertButton.addActionListener(new ActionListener()
 		{
