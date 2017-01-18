@@ -25,6 +25,7 @@ public class BinaryPanel extends JPanel
 		this.baseController = baseController;
 		
 		baseLayout = new SpringLayout();
+		baseLayout.putConstraint(SpringLayout.EAST, converted, 0, SpringLayout.EAST, convertButton);
 		binary = new Binary();
 		
 		setupPanel();
@@ -62,14 +63,12 @@ public class BinaryPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.SOUTH, converted, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, convertButton, 10, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, converted, 10, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.EAST, converted, 581, SpringLayout.WEST, this);
 	}
 	
 	private void setConvertedProperties()
 	{
 		converted.setWrapStyleWord(true);
 		converted.setLineWrap(true);
-		converted.setRows(5);
 		converted.setEditable(false);
 	}
 	
