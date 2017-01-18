@@ -11,6 +11,7 @@ public class BinaryPanel extends JPanel
 //	private JTextField binaryField;
 	private JTextArea toBeConverted;
 	private JTextArea converted;
+	private JScrollPane scroll;
 	private JLabel in;
 	private JLabel out;
 	private SpringLayout baseLayout;
@@ -24,8 +25,9 @@ public class BinaryPanel extends JPanel
 		this.converted = new JTextArea();
 		this.in = new JLabel("Input");
 		this.out = new JLabel("Output");
-		baseLayout = new SpringLayout();
-		binary = new Binary();
+		this.baseLayout = new SpringLayout();
+		this.binary = new Binary();
+		this.scroll = new JScrollPane();
 		
 		setupPanel();
 		setupLayout();
@@ -42,6 +44,7 @@ public class BinaryPanel extends JPanel
 		this.add(converted);
 		this.add(in);
 		this.add(out);
+		this.add(scroll);
 	}
 	
 	private void setupLayout()
