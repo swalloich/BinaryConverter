@@ -8,9 +8,11 @@ import binary.model.Binary;
 public class BinaryPanel extends JPanel
 {
 	private JButton convertButton;
-	private JTextField binaryField;
-//	private JTextArea toBeConverted;
+//	private JTextField binaryField;
+	private JTextArea toBeConverted;
 	private JTextArea converted;
+	private JLabel in;
+	private JLabel out;
 	private SpringLayout baseLayout;
 	private Binary binary;
 	private BinaryController baseController;
@@ -19,57 +21,63 @@ public class BinaryPanel extends JPanel
 	{
 		super();
 		this.convertButton = new JButton("Convert");
-		this.binaryField = new JTextField("Enter input here");
-//		this.toBeConverted = new JTextArea(15, 15);
+//		this.binaryField = new JTextField("Enter input here");
+		this.toBeConverted = new JTextArea(15, 15);
 		this.converted = new JTextArea();
+		this.in = new JLabel("Input");
+		this.out = new JLabel("Output");
 		this.baseController = baseController;
 		
 		baseLayout = new SpringLayout();
-		baseLayout.putConstraint(SpringLayout.EAST, converted, 0, SpringLayout.EAST, convertButton);
 		binary = new Binary();
 		
 		setupPanel();
 		setupLayout();
 		setupListeners();
-		setConvertedProperties();
+		setTextAreaProperties();
 	}
 	
 	private void setupPanel()
 	{
 		this.setLayout(baseLayout);
 		this.add(convertButton);
-		this.add(binaryField);
-//		this.add(toBeConverted);
+//		this.add(binaryField);
+		this.add(toBeConverted);
 		this.add(converted);
+		this.add(in);
+		this.add(out);
 	}
 	
 	private void setupLayout()
 	{
-
-//		baseLayout.putConstraint(SpringLayout.NORTH, convertButton, 117, SpringLayout.NORTH, this);
-//		baseLayout.putConstraint(SpringLayout.NORTH, toBeConverted, 0, SpringLayout.NORTH, converted);
-//		baseLayout.putConstraint(SpringLayout.WEST, toBeConverted, 10, SpringLayout.WEST, this);
-//		baseLayout.putConstraint(SpringLayout.SOUTH, toBeConverted, 0, SpringLayout.SOUTH, converted);
-//		baseLayout.putConstraint(SpringLayout.EAST, toBeConverted, 230, SpringLayout.WEST, this);
-//		baseLayout.putConstraint(SpringLayout.NORTH, converted, 10, SpringLayout.NORTH, this);
-//		baseLayout.putConstraint(SpringLayout.WEST, converted, -230, SpringLayout.EAST, this);
-//		baseLayout.putConstraint(SpringLayout.SOUTH, converted, -10, SpringLayout.SOUTH, this);
-//		baseLayout.putConstraint(SpringLayout.EAST, converted, -10, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, converted, 6, SpringLayout.SOUTH, convertButton);
-		baseLayout.putConstraint(SpringLayout.WEST, binaryField, 10, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.EAST, binaryField, -6, SpringLayout.WEST, convertButton);
-		baseLayout.putConstraint(SpringLayout.EAST, convertButton, -10, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, binaryField, 0, SpringLayout.NORTH, convertButton);
+		baseLayout.putConstraint(SpringLayout.WEST, toBeConverted, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, toBeConverted, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, convertButton, 6, SpringLayout.EAST, toBeConverted);
+		baseLayout.putConstraint(SpringLayout.EAST, convertButton, -6, SpringLayout.WEST, converted);
+		baseLayout.putConstraint(SpringLayout.NORTH, converted, 28, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, converted, -10, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, convertButton, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, converted, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, toBeConverted, 28, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, converted, 451, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, converted, -10, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, toBeConverted, -451, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, convertButton, 186, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, out, 0, SpringLayout.WEST, converted);
+		baseLayout.putConstraint(SpringLayout.EAST, out, 0, SpringLayout.EAST, converted);
+		baseLayout.putConstraint(SpringLayout.WEST, in, 0, SpringLayout.WEST, toBeConverted);
+		baseLayout.putConstraint(SpringLayout.EAST, in, 0, SpringLayout.EAST, toBeConverted);
+		baseLayout.putConstraint(SpringLayout.SOUTH, out, -6, SpringLayout.NORTH, converted);
+		baseLayout.putConstraint(SpringLayout.SOUTH, in, -6, SpringLayout.NORTH, toBeConverted);
+		out.setHorizontalAlignment(SwingConstants.CENTER);
+		in.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	
-	private void setConvertedProperties()
+	private void setTextAreaProperties()
 	{
 		converted.setWrapStyleWord(true);
 		converted.setLineWrap(true);
 		converted.setEditable(false);
+		toBeConverted.setWrapStyleWord(true);
+		toBeConverted.setLineWrap(true);
 	}
 	
 	private void setupListeners()
@@ -88,7 +96,7 @@ public class BinaryPanel extends JPanel
 //				}
 //				
 //			}
-		
+//		
 //			toBeConverted.addKeyListener(new KeyListener()
 //			{
 //			public void keyTyped(KeyEvent e)
@@ -123,7 +131,7 @@ public class BinaryPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				String input = binaryField.getText();
+				String input = toBeConverted.getText();
 					if(!binary.binaryChecker(input) && !input.equals(""))
 					{
 						converted.setText(binary.convertToBinary(input, input));
@@ -135,20 +143,20 @@ public class BinaryPanel extends JPanel
 				}
 		});
 		
-		binaryField.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent clicked)
-			{
-				String input = binaryField.getText();
-					if(!binary.binaryChecker(input) && !input.equals(""))
-					{
-						converted.setText(binary.convertToBinary(input, input));
-					}
-					else if(!input.equals(""))
-					{
-						converted.setText(binary.convertFromBinary(input, input));
-					}
-				}
-		});
+//		binaryField.addActionListener(new ActionListener()
+//		{
+//			public void actionPerformed(ActionEvent clicked)
+//			{
+//				String input = binaryField.getText();
+//					if(!binary.binaryChecker(input) && !input.equals(""))
+//					{
+//						converted.setText(binary.convertToBinary(input, input));
+//					}
+//					else if(!input.equals(""))
+//					{
+//						converted.setText(binary.convertFromBinary(input, input));
+//					}
+//				}
+//		});
 	}
 }
