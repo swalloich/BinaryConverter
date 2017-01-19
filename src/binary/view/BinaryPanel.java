@@ -11,9 +11,10 @@ public class BinaryPanel extends JPanel
 //	private JTextField binaryField;
 	private JTextArea toBeConverted;
 	private JTextArea converted;
-	private JScrollPane scroll;
 	private JLabel in;
 	private JLabel out;
+	private JScrollPane scrollIn;
+	private JScrollPane scrollOut;
 	private SpringLayout baseLayout;
 	private Binary binary;
 	public BinaryPanel(BinaryController baseController)
@@ -27,7 +28,8 @@ public class BinaryPanel extends JPanel
 		this.out = new JLabel("Output");
 		this.baseLayout = new SpringLayout();
 		this.binary = new Binary();
-		this.scroll = new JScrollPane();
+		this.scrollIn = new JScrollPane(toBeConverted);
+		this.scrollOut = new JScrollPane(converted);
 		
 		setupPanel();
 		setupLayout();
@@ -40,11 +42,10 @@ public class BinaryPanel extends JPanel
 		this.setLayout(baseLayout);
 		this.add(convertButton);
 //		this.add(binaryField);
-		this.add(toBeConverted);
-		this.add(converted);
 		this.add(in);
 		this.add(out);
-		this.add(scroll);
+		this.add(scrollIn);
+		this.add(scrollOut);
 	}
 	
 	private void setupLayout()
@@ -62,10 +63,18 @@ public class BinaryPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.NORTH, convertButton, 186, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, out, 0, SpringLayout.WEST, converted);
 		baseLayout.putConstraint(SpringLayout.EAST, out, 0, SpringLayout.EAST, converted);
-		baseLayout.putConstraint(SpringLayout.WEST, in, 0, SpringLayout.WEST, toBeConverted);
-		baseLayout.putConstraint(SpringLayout.EAST, in, 0, SpringLayout.EAST, toBeConverted);
 		baseLayout.putConstraint(SpringLayout.SOUTH, out, -6, SpringLayout.NORTH, converted);
-		baseLayout.putConstraint(SpringLayout.SOUTH, in, -6, SpringLayout.NORTH, toBeConverted);
+		baseLayout.putConstraint(SpringLayout.NORTH, scrollOut, 0, SpringLayout.NORTH, toBeConverted);
+		baseLayout.putConstraint(SpringLayout.WEST, scrollOut, 0, SpringLayout.WEST, out);
+		baseLayout.putConstraint(SpringLayout.SOUTH, scrollOut, 0, SpringLayout.SOUTH, toBeConverted);
+		baseLayout.putConstraint(SpringLayout.EAST, scrollOut, 0, SpringLayout.EAST, out);
+		baseLayout.putConstraint(SpringLayout.NORTH, in, 0, SpringLayout.NORTH, out);
+		baseLayout.putConstraint(SpringLayout.WEST, in, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, in, -151, SpringLayout.WEST, out);
+		baseLayout.putConstraint(SpringLayout.NORTH, scrollIn, 6, SpringLayout.SOUTH, in);
+		baseLayout.putConstraint(SpringLayout.EAST, scrollIn, 300, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, scrollIn, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, scrollIn, -10, SpringLayout.SOUTH, this);
 	}
 	
 	private void setTextFieldProperties()
@@ -77,6 +86,8 @@ public class BinaryPanel extends JPanel
 		toBeConverted.setLineWrap(true);
 		out.setHorizontalAlignment(SwingConstants.CENTER);
 		in.setHorizontalAlignment(SwingConstants.CENTER);
+		scrollIn.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollOut.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	}
 	
 	private void setupListeners()
