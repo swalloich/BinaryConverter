@@ -49,7 +49,7 @@ public class Binary
 	{
 		boolean isBinary = true;
 		for(int index = 0; index < input.length(); index++){
-			if(input.substring(index, index+1).equals("0")||input.substring(index, index+1).equals("1")||input.substring(index, index+1).equals(" "))
+			if(input.substring(index, index+1).equals("0") || input.substring(index, index+1).equals("1") || input.substring(index, index+1).equals(" ") || input.substring(index, index+1).equals("\r"))
 			{
 				
 			}
