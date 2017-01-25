@@ -31,9 +31,9 @@ public class Binary
 	
 	public String convertFromBinary(String currentInput, String output)
 	{
-		if(binaryChecker(currentInput))
+		if(binaryChecker(currentInput) && !currentInput.equals(""))
 		{
-			String[] binary = currentInput.split( " " );
+			String[] binary = currentInput.split(" ");
 			StringBuilder converted = new StringBuilder();
 			for(int length = 0; length < binary.length; length++)
 			{
@@ -49,7 +49,7 @@ public class Binary
 	{
 		boolean isBinary = true;
 		for(int index = 0; index < input.length(); index++){
-			if(input.substring(index, index+1).equals("0") || input.substring(index, index+1).equals("1") || input.substring(index, index+1).equals(" ") || input.substring(index, index+1).equals("\r"))
+			if(input.substring(index, index+1).equals("0") || input.substring(index, index+1).equals("1") || input.substring(index, index+1).equals(" ") || input.substring(index, index+1).equals("\n"))
 			{
 				
 			}
