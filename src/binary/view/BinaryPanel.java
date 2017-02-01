@@ -17,6 +17,7 @@ public class BinaryPanel extends JPanel
 	private JScrollPane scrollOut;
 	private SpringLayout baseLayout;
 	private Binary binary;
+	
 	public BinaryPanel(BinaryController baseController)
 	{
 		super();
