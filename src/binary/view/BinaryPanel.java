@@ -1,7 +1,19 @@
 package binary.view;
 
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
+
 import binary.controller.BinaryController;
 import binary.model.Binary;
 
@@ -19,10 +31,12 @@ public class BinaryPanel extends JPanel
 	private SpringLayout baseLayout;
 	private Binary binary;
 	private BinaryController baseController;
+	private JFrame myFrame;
 	
-	public BinaryPanel(BinaryController baseController)
+	public BinaryPanel(BinaryController baseController,JFrame myframe)
 	{
 		super();
+		this.myFrame = myframe;
 		this.baseController = baseController;
 		this.convertButton = new JButton("Convert");
 //		this.binaryField = new JTextField("Enter input here");
@@ -131,11 +145,11 @@ public class BinaryPanel extends JPanel
 					String input = toBeConverted.getText();
 					if(!binary.binaryChecker(input))
 					{
-						converted.setText(binary.convertToBinary(input, input));
+						converted.setText(binary.convertToBinary(input));
 					}
 					else
 					{
-						converted.setText(binary.convertFromBinary(input, input));
+						converted.setText(binary.convertFromBinary(input));
 					}
 				}
 			}
@@ -153,11 +167,11 @@ public class BinaryPanel extends JPanel
 				String input = toBeConverted.getText();
 				if(!binary.binaryChecker(input) && !input.equals(""))
 				{
-					converted.setText(binary.convertToBinary(input, input));
+					converted.setText(binary.convertToBinary(input));
 				}
 				else if(!input.equals(""))
 				{
-					converted.setText(binary.convertFromBinary(input, input));
+					converted.setText(binary.convertFromBinary(input));
 				}
 			}
 		});
@@ -166,7 +180,7 @@ public class BinaryPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				HelpFrame help = new HelpFrame(baseController);
+				HelpFrame help = new HelpFrame(baseController,myFrame);
 			}
 		});
 		

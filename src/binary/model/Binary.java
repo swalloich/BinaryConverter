@@ -7,8 +7,9 @@ public class Binary
 		
 	}
 	
-	public String convertToBinary(String currentInput, String output)
+	public String convertToBinary(String currentInput)
 	{
+		String output = "";
 		if(!binaryChecker(currentInput))
 		{
 			byte[] bytes = currentInput.getBytes();
@@ -28,16 +29,27 @@ public class Binary
 		
 		return output;
 	}
-	
-	public String convertFromBinary(String currentInput, String output)
+/*
+ * I would suggest changing up the colors a bit, or allowing users to change the color with some sort of option within the program. 	
+ */
+
+	public String convertFromBinary(String currentInput)
 	{
+		String output = "";
 		if(binaryChecker(currentInput) && !currentInput.equals(""))
 		{
 			String[] binary = currentInput.split(" ");
 			StringBuilder converted = new StringBuilder();
+			if(!currentInput.contains(" "))
+			{
+				for(int i = (currentInput.length() + 1) / 2; i < currentInput.length(); i++)
+				{
+					
+				}
+			}
 			for(int length = 0; length < binary.length; length++)
 			{
-				converted.append( (char)Integer.parseInt( binary[length], 2) );
+				converted.append((char)Integer.parseInt( binary[length], 2));
 			}
 			output = converted.toString();
 		}
