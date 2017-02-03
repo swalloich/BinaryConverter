@@ -13,7 +13,6 @@ public class BinaryFrame extends JFrame
 	{
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
 		basePanel = new BinaryPanel(baseController);
 		
 		setupFrame();

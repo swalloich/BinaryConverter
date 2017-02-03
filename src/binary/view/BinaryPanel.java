@@ -13,14 +13,17 @@ public class BinaryPanel extends JPanel
 	private JTextArea converted;
 	private JLabel in;
 	private JLabel out;
+	private JButton help;
 	private JScrollPane scrollIn;
 	private JScrollPane scrollOut;
 	private SpringLayout baseLayout;
 	private Binary binary;
+	private BinaryController baseController;
 	
 	public BinaryPanel(BinaryController baseController)
 	{
 		super();
+		this.baseController = baseController;
 		this.convertButton = new JButton("Convert");
 //		this.binaryField = new JTextField("Enter input here");
 		this.toBeConverted = new JTextArea();
@@ -31,6 +34,7 @@ public class BinaryPanel extends JPanel
 		this.binary = new Binary();
 		this.scrollIn = new JScrollPane(toBeConverted);
 		this.scrollOut = new JScrollPane(converted);
+		this.help = new JButton("help");
 		
 		setupPanel();
 		setupLayout();
@@ -47,6 +51,7 @@ public class BinaryPanel extends JPanel
 		this.add(out);
 		this.add(scrollIn);
 		this.add(scrollOut);
+		this.add(help);
 	}
 	
 	private void setupLayout()
@@ -76,6 +81,9 @@ public class BinaryPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, scrollIn, 300, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.WEST, scrollIn, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, scrollIn, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, help, 25, SpringLayout.EAST, scrollIn);
+		baseLayout.putConstraint(SpringLayout.SOUTH, help, 0, SpringLayout.SOUTH, scrollIn);
+		baseLayout.putConstraint(SpringLayout.EAST, help, 125, SpringLayout.EAST, scrollIn);
 	}
 	
 	private void setTextFieldProperties()
@@ -143,15 +151,23 @@ public class BinaryPanel extends JPanel
 			public void actionPerformed(ActionEvent clicked)
 			{
 				String input = toBeConverted.getText();
-					if(!binary.binaryChecker(input) && !input.equals(""))
-					{
-						converted.setText(binary.convertToBinary(input, input));
-					}
-					else if(!input.equals(""))
-					{
-						converted.setText(binary.convertFromBinary(input, input));
-					}
+				if(!binary.binaryChecker(input) && !input.equals(""))
+				{
+					converted.setText(binary.convertToBinary(input, input));
 				}
+				else if(!input.equals(""))
+				{
+					converted.setText(binary.convertFromBinary(input, input));
+				}
+			}
+		});
+		
+		help.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				HelpFrame help = new HelpFrame(baseController);
+			}
 		});
 		
 //		binaryField.addActionListener(new ActionListener()
