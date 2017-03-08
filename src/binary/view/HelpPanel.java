@@ -1,10 +1,15 @@
 package binary.view;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.*;
 import binary.controller.BinaryController;
 
 public class HelpPanel extends JPanel
 {
+	private String document;
+	private String line;
 	private SpringLayout helpLayout;
 	private JScrollPane scroll;
 	private JTextArea help;
@@ -13,6 +18,8 @@ public class HelpPanel extends JPanel
 	public HelpPanel(BinaryController baseController)
 	{
 		this.helpLayout = new SpringLayout();
+		this.document = "/Users/jnel4175/Documents/help.txt";
+		this.line = null;
 		this.help = new JTextArea();
 		this.scroll = new JScrollPane(help);
 		this.baseController = baseController;
@@ -21,6 +28,7 @@ public class HelpPanel extends JPanel
 		setupLayout();
 		setupListeners();
 		formatHelp();
+		readFiles();
 	}
 	
 	private void setupPanel()
@@ -48,5 +56,25 @@ public class HelpPanel extends JPanel
 	private void setupListeners()
 	{
 		
+	}
+	
+	private void readFiles()
+	{
+		try
+		{
+			FileReader fileReader = new FileReader(document);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			
+			while((line = bufferedReader.readLine()) != null)
+			{
+				help.append(line);
+			}
+			
+			bufferedReader.close();
+		}
+		catch(IOException ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 }

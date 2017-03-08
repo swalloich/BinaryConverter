@@ -1,7 +1,6 @@
 package binary.controller;
 
 import binary.view.BinaryFrame;
-import binary.view.HelpFrame;
 
 public class BinaryController 
 {
