@@ -36,7 +36,7 @@ public class Binary
 
 	public String convertFromBinary(String currentInput)
 	{
-		String output = "";
+		String output = null;
 		if (binaryChecker(currentInput) && !currentInput.equals(""))
 		{
 			String[] binary = currentInput.split(" ");
@@ -65,21 +65,43 @@ public class Binary
 
 	public String newBinaryConvert(String input)
 	{
-		String output = "";
-		String[] things = input.split("");
-		if (binaryChecker(input) && !input.equals(""))
+		String output = new String();
+		
+		String removeSpaces = new String();
+		StringBuilder converted = new StringBuilder();
+		
+		System.out.println(input);
+		
+		for(int index = 0; index < input.length(); index++)
 		{
-			StringBuilder converted = new StringBuilder();
-			for (int index = 0; index < input.length() % 6; index++)
+			if(!input.substring(index, index + 1).equalsIgnoreCase(" ") && !input.substring(index, index + 1).equalsIgnoreCase("\n"))
 			{
-				for (int i = 0; i < 6; i++)
-				{
-					converted.append(things[i * (index + 1)]);
-					System.out.println(converted.toString());
-				}
+				removeSpaces += input.charAt(index);
 			}
-			output = converted.toString();
 		}
+		
+		String[] binary = new String[removeSpaces.length()/8];
+		
+		System.out.println(removeSpaces);
+		//0,8
+		//8,16
+		int spot=0;
+		for(int index = 0; index < binary.length + 1; index += 8)
+		{
+				binary[spot] = removeSpaces.substring(index, (index * 8));
+				converted.append((char) Integer.parseInt(binary[spot], 2));
+				spot++;
+		}
+//		if(input.contains(" "))
+//		{
+//			for(int index = 0; index < binary.length; index++)
+//			{
+//				binary[index] = input.substring(1*index, 8*index);
+//				System.out.println(binary[index]);
+//				converted.append((char) Integer.parseInt(binary[index]));
+//			}
+//		}
+		output = converted.toString();
 		return output;
 	}
 
