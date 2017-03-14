@@ -148,7 +148,7 @@ public class BinaryPanel extends JPanel
 					}
 					else
 					{
-						converted.setText(binary.newBinaryConvert(input));
+						converted.setText(binary.convertFromBinary(input));
 					}
 				}
 			}
@@ -170,7 +170,7 @@ public class BinaryPanel extends JPanel
 				}
 				else if(!input.equals(""))
 				{
-					converted.setText(binary.newBinaryConvert(input));
+					converted.setText(binary.convertFromBinary(input));
 				}
 			}
 		});
