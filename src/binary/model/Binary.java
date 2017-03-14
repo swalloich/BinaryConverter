@@ -78,21 +78,12 @@ public class Binary
 			}
 		}
 
-		String[] binary = new String[removeSpaces.length() / 8];
-
-		int spot = 0;
-		for (int index = 0; index < binary.length * 8; index++)
+		for (int index = 0; index < removeSpaces.length(); index++)
 		{
 			double temp = (index + 1) % 8;
 			if (temp == 0)
 			{
-				String tempString = removeSpaces.substring((index + 1) - 8, (index + 1));
-				binary[spot] = tempString;
-				converted.append((char) Integer.parseInt(binary[spot], 2));
-			}
-			if (temp == 0)
-			{
-				spot++;
+				converted.append((char) Integer.parseInt(removeSpaces.substring((index + 1) - 8, (index + 1)), 2));
 			}
 		}
 		output = converted.toString();
@@ -113,17 +104,6 @@ public class Binary
 				isBinary = false;
 			}
 		}
-
-		// if(input.contains("1") || input.contains("0") &&
-		// !input.matches("[a-zA-Z]+"))
-		// {
-		// isBinary = true;
-		// if(!input.contains("1") && !input.contains("0"))
-		// {
-		// isBinary = false;
-		// }
-		// }
-
 		return isBinary;
 	}
 }
