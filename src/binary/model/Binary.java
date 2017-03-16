@@ -29,28 +29,11 @@ public class Binary
 
 		return output;
 	}
+	
 	/*
 	 * I would suggest changing up the colors a bit, or allowing users to change
 	 * the color with some sort of option within the program.
 	 */
-
-	// public String convertFromBinary(String currentInput)
-	// {
-	// String output = null;
-	// if (binaryChecker(currentInput) && !currentInput.equals(""))
-	// {
-	// String[] binary = currentInput.split(" ");
-	// StringBuilder converted = new StringBuilder();
-	// for (int length = 0; length < binary.length; length++)
-	// {
-	// converted.append((char) Integer.parseInt(binary[length], 2));
-	// }
-	// output = converted.toString();
-	// }
-	//
-	// return output;
-	// }
-
 	public String stringArrayToString(String[] input)
 	{
 		String output = "";

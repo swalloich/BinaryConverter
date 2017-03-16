@@ -1,5 +1,6 @@
 package binary.view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
-
 import binary.controller.BinaryController;
 import binary.model.Binary;
 
@@ -24,7 +24,7 @@ public class BinaryPanel extends JPanel
 	private JTextArea converted;
 	private JLabel in;
 	private JLabel out;
-	private JButton help;
+	private JButton setTheme;
 	private JScrollPane scrollIn;
 	private JScrollPane scrollOut;
 	private SpringLayout baseLayout;
@@ -47,7 +47,7 @@ public class BinaryPanel extends JPanel
 		this.binary = new Binary();
 		this.scrollIn = new JScrollPane(toBeConverted);
 		this.scrollOut = new JScrollPane(converted);
-		this.help = new JButton("help");
+		this.setTheme = new JButton("Colors");
 		
 		setupPanel();
 		setupLayout();
@@ -64,7 +64,7 @@ public class BinaryPanel extends JPanel
 		this.add(out);
 		this.add(scrollIn);
 		this.add(scrollOut);
-		this.add(help);
+		this.add(setTheme);
 	}
 	
 	private void setupLayout()
@@ -94,9 +94,9 @@ public class BinaryPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, scrollIn, 300, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.WEST, scrollIn, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, scrollIn, -10, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, help, 25, SpringLayout.EAST, scrollIn);
-		baseLayout.putConstraint(SpringLayout.SOUTH, help, 0, SpringLayout.SOUTH, scrollIn);
-		baseLayout.putConstraint(SpringLayout.EAST, help, 125, SpringLayout.EAST, scrollIn);
+		baseLayout.putConstraint(SpringLayout.WEST, setTheme, 25, SpringLayout.EAST, scrollIn);
+		baseLayout.putConstraint(SpringLayout.SOUTH, setTheme, 0, SpringLayout.SOUTH, scrollIn);
+		baseLayout.putConstraint(SpringLayout.EAST, setTheme, 125, SpringLayout.EAST, scrollIn);
 	}
 	
 	private void setTextFieldProperties()
@@ -175,11 +175,11 @@ public class BinaryPanel extends JPanel
 			}
 		});
 		
-		help.addActionListener(new ActionListener()
+		setTheme.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				HelpFrame help = new HelpFrame(baseController,myFrame);
+				ColorFrame colorFrame = new ColorFrame(baseController,myFrame,getMe(),getMe());
 			}
 		});
 		
@@ -198,5 +198,20 @@ public class BinaryPanel extends JPanel
 //					}
 //				}
 //		});
+	}
+	
+	private BinaryPanel getMe()
+	{
+		return this;
+	}
+	
+	public void setConvertColor(Color color)
+	{
+		convertButton.setBackground(color);
+	}
+	
+	public void setColorColor(Color color)
+	{
+		setTheme.setBackground(color);
 	}
 }

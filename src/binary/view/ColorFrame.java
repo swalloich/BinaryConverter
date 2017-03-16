@@ -4,18 +4,19 @@ import java.awt.Dimension;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import binary.controller.BinaryController;
 
-public class HelpFrame extends JDialog
+public class ColorFrame extends JDialog
 {
-	private HelpPanel helpPanel;
+	private ColorPanel helpPanel;
 
-	public HelpFrame(BinaryController baseController,JFrame parent)
+	public ColorFrame(BinaryController baseController,JFrame parent,JPanel parentPanel, BinaryPanel binaryPanel)
 	{
 		super(parent);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.helpPanel = new HelpPanel(baseController);
+		this.helpPanel = new ColorPanel(baseController,parentPanel, binaryPanel);
 		this.setLocation(parent.getWidth(),parent.getHeight());
 		
 		setupFrame();
@@ -24,8 +25,8 @@ public class HelpFrame extends JDialog
 	private void setupFrame()
 	{
 		this.setContentPane(helpPanel);
-		this.setTitle("Help");
-		this.setSize(new Dimension(400, 300));
+		this.setTitle("Color Settings");
+		this.setSize(new Dimension(400, 380));
 		this.setResizable(false);
 		this.setVisible(true);
 	}
