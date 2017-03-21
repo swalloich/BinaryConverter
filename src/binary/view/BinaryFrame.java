@@ -1,11 +1,10 @@
 package binary.view;
 
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
-
 import binary.controller.BinaryController;
 
+@SuppressWarnings("serial")
 public class BinaryFrame extends JFrame
 {
 	private BinaryPanel basePanel;
@@ -14,7 +13,7 @@ public class BinaryFrame extends JFrame
 	{
 		super();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		basePanel = new BinaryPanel(baseController,this);
+		basePanel = new BinaryPanel(baseController, this);
 		
 		setupFrame();
 	}

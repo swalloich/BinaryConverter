@@ -13,9 +13,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
 import binary.controller.BinaryController;
 import binary.model.Binary;
 
+@SuppressWarnings("serial")
 public class BinaryPanel extends JPanel
 {
 	private JButton convertButton;
@@ -31,6 +34,7 @@ public class BinaryPanel extends JPanel
 	private Binary binary;
 	private BinaryController baseController;
 	private JFrame myFrame;
+	private ColorPanel colorPanel;
 	
 	public BinaryPanel(BinaryController baseController,JFrame myframe)
 	{
@@ -48,8 +52,9 @@ public class BinaryPanel extends JPanel
 		this.scrollIn = new JScrollPane(toBeConverted);
 		this.scrollOut = new JScrollPane(converted);
 		this.setTheme = new JButton("Colors");
-		
+		this.colorPanel = null;
 		setupPanel();
+		formatButtons();
 		setupLayout();
 		setupListeners();
 		setTextFieldProperties();
@@ -180,6 +185,8 @@ public class BinaryPanel extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				ColorFrame colorFrame = new ColorFrame(baseController,myFrame,getMe(),getMe());
+				colorPanel = colorFrame.getPanel();
+				
 			}
 		});
 		
@@ -205,13 +212,30 @@ public class BinaryPanel extends JPanel
 		return this;
 	}
 	
+	public void formatButtons()
+	{
+		convertButton.setOpaque(true);
+		convertButton.setBorder(new LineBorder(Color.BLACK));
+		if(colorPanel != null)
+		{
+		convertButton.setBackground(colorPanel.getSecondaryThemeColor());
+		}
+		
+		setTheme.setOpaque(true);
+		setTheme.setBorder(new LineBorder(Color.BLACK));
+		if(colorPanel != null)
+		{
+		setTheme.setBackground(colorPanel.getSecondaryThemeColor());
+		}
+	}
+	
 	public void setConvertColor(Color color)
 	{
-		convertButton.setBackground(color);
+		this.convertButton.setBackground(color);
 	}
 	
 	public void setColorColor(Color color)
 	{
-		setTheme.setBackground(color);
+		this.setTheme.setBackground(color);
 	}
 }

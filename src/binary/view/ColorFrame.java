@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import binary.controller.BinaryController;
 
+@SuppressWarnings("serial")
 public class ColorFrame extends JDialog
 {
 	private ColorPanel helpPanel;
@@ -29,5 +30,9 @@ public class ColorFrame extends JDialog
 		this.setSize(new Dimension(400, 380));
 		this.setResizable(false);
 		this.setVisible(true);
+	}
+	public ColorPanel getPanel()
+	{
+		return helpPanel;
 	}
 }
