@@ -41,6 +41,7 @@ public class ColorPanel extends JPanel
 	private BinaryPanel binaryPanel;
 	private JButton setSecondary;
 	private JButton temp;
+	private Color textColor;
 
 	public ColorPanel(BinaryController baseController, JPanel parentPanel, BinaryPanel binaryPanel)
 	{
@@ -128,8 +129,8 @@ public class ColorPanel extends JPanel
 		this.setSecondary.setOpaque(true);
 		this.setSecondary.setBorder(new LineBorder(Color.BLACK));
 		this.setSecondary.setBackground(themeSecondary);
-		checkColor("primary", setPrimary);
-		checkColor("secondary", setSecondary);
+		setTextColor(primaryRedSlider, primaryGreenSlider, primaryBlueSlider, setPrimary);
+		setTextColor(secondaryRedSlider, secondaryGreenSlider, secondaryBlueSlider, setSecondary);
 	}
 
 	private void setupLayout()
@@ -247,68 +248,36 @@ public class ColorPanel extends JPanel
 		});
 	}
 
-	private boolean hasTwoZero(JSlider redSlider, JSlider greenSlider, JSlider blueSlider)
+	private void setTextColor(JSlider redSlider, JSlider greenSlider, JSlider blueSlider, JButton button)
 	{
-		boolean hasTwoZero = false;
+		int average = ((redSlider.getValue() + greenSlider.getValue() + blueSlider.getValue()) / 3);
 
-		if (redSlider.getValue() == 0 && greenSlider.getValue() == 0 && blueSlider.getValue() != 0)
+		if ((average - 5 > 127 && average + 5 < 127) && (average - 5 > 127 && average + 5 < 127)
+				&& (average - 5 > 127 && average + 5 < 127))
 		{
-			hasTwoZero = true;
-		} else if (redSlider.getValue() == 0 && greenSlider.getValue() != 0 && blueSlider.getValue() == 0)
+			setTextColorColor(Color.BLACK);
+		}
+		else
 		{
-			hasTwoZero = true;
-		} else if (redSlider.getValue() != 0 && greenSlider.getValue() == 0 && blueSlider.getValue() == 0)
-		{
-			hasTwoZero = true;
-		} else
-		{
-			hasTwoZero = false;
+			setTextColorValues(redSlider.getValue(), greenSlider.getValue(), blueSlider.getValue());
 		}
 
-		return hasTwoZero;
-	}
-
-	private void checkColor(String slider, JButton button)
-	{
-		if (slider.equalsIgnoreCase("secondary"))
-		{
-			if (hasTwoZero(secondaryRedSlider, secondaryGreenSlider, secondaryBlueSlider))
-			{
-				button.setForeground(Color.LIGHT_GRAY);
-			} else if (getSecRed() + getSecGreen() + getSecBlue() <= 160)
-			{
-				button.setForeground(Color.LIGHT_GRAY);
-			} else
-			{
-				button.setForeground(Color.BLACK);
-			}
-		} else if (slider.equalsIgnoreCase("primary"))
-		{
-			if (hasTwoZero(primaryRedSlider, primaryGreenSlider, primaryBlueSlider))
-			{
-				button.setForeground(Color.LIGHT_GRAY);
-			} else if (getPrRed() + getPrGreen() + getPrBlue() <= 160)
-			{
-				button.setForeground(Color.LIGHT_GRAY);
-			} else
-			{
-				button.setForeground(Color.BLACK);
-			}
-		}
+		button.setForeground(textColor);
 	}
 
 	private void primarySliderStuff()
 	{
-		setPrimaryColor(getPrRed(), getPrGreen(), getPrBlue());
+		setPrimaryColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue());
 		this.setPrimary.setBackground(themePrimary);
-		checkColor("primary", setPrimary);
+		setTextColor(primaryRedSlider, primaryGreenSlider, primaryBlueSlider, setPrimary);
 	}
 
 	private void secondarySliderStuff()
 	{
-		setSecondaryColor(getSecRed(), getSecGreen(), getSecBlue());
+		setSecondaryColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(),
+				secondaryBlueSlider.getValue());
 		this.setSecondary.setBackground(themeSecondary);
-		checkColor("secondary", setSecondary);
+		setTextColor(secondaryRedSlider, secondaryGreenSlider, secondaryBlueSlider, setSecondary);
 	}
 
 	private void changeSecondary()
@@ -342,6 +311,16 @@ public class ColorPanel extends JPanel
 	public void setSecondaryColor(int r, int g, int b)
 	{
 		themeSecondary = new Color(r, g, b);
+	}
+
+	public void setTextColorValues(int r, int g, int b)
+	{
+		textColor = new Color(r, g, b);
+	}
+	
+	public void setTextColorColor(Color color)
+	{
+		textColor = color;
 	}
 
 	public int getPRSlider()

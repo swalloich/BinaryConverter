@@ -16,7 +16,7 @@ public class ColorFrame extends JDialog
 	public ColorFrame(BinaryController baseController,JFrame parent,JPanel parentPanel, BinaryPanel binaryPanel)
 	{
 		super(parent);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
 		this.helpPanel = new ColorPanel(baseController,parentPanel, binaryPanel);
 		this.setLocation(parent.getWidth(),parent.getHeight());
 		
@@ -25,6 +25,7 @@ public class ColorFrame extends JDialog
 	
 	private void setupFrame()
 	{
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setContentPane(helpPanel);
 		this.setTitle("Color Settings");
 		this.setSize(new Dimension(400, 380));

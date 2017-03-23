@@ -53,6 +53,7 @@ public class BinaryPanel extends JPanel
 		this.scrollOut = new JScrollPane(converted);
 		this.setTheme = new JButton("Colors");
 		this.colorPanel = null;
+		
 		setupPanel();
 		formatButtons();
 		setupLayout();
