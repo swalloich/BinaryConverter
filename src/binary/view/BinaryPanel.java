@@ -75,10 +75,21 @@ public class BinaryPanel extends JPanel
 	
 	private void setupLayout()
 	{
+		baseLayout.putConstraint(SpringLayout.SOUTH, setTheme, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, setTheme, -25, SpringLayout.WEST, scrollOut);
+		baseLayout.putConstraint(SpringLayout.NORTH, scrollOut, 6, SpringLayout.SOUTH, out);
+		baseLayout.putConstraint(SpringLayout.WEST, scrollOut, 450, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, scrollOut, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, convertButton, -6, SpringLayout.WEST, scrollOut);
+		baseLayout.putConstraint(SpringLayout.EAST, scrollOut, -10, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, scrollIn, 6, SpringLayout.SOUTH, in);
+		baseLayout.putConstraint(SpringLayout.SOUTH, scrollIn, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, scrollIn, -450, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, convertButton, 6, SpringLayout.EAST, scrollIn);
+		baseLayout.putConstraint(SpringLayout.EAST, in, 0, SpringLayout.EAST, scrollIn);
+		baseLayout.putConstraint(SpringLayout.NORTH, in, 0, SpringLayout.NORTH, out);
 		baseLayout.putConstraint(SpringLayout.WEST, toBeConverted, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, toBeConverted, -10, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, convertButton, 6, SpringLayout.EAST, toBeConverted);
-		baseLayout.putConstraint(SpringLayout.EAST, convertButton, -6, SpringLayout.WEST, converted);
 		baseLayout.putConstraint(SpringLayout.NORTH, converted, 28, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, converted, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, toBeConverted, 28, SpringLayout.NORTH, this);
@@ -86,23 +97,10 @@ public class BinaryPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, converted, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.EAST, toBeConverted, -451, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, convertButton, 186, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, out, 0, SpringLayout.WEST, converted);
-		baseLayout.putConstraint(SpringLayout.EAST, out, 0, SpringLayout.EAST, converted);
-		baseLayout.putConstraint(SpringLayout.SOUTH, out, -6, SpringLayout.NORTH, converted);
-		baseLayout.putConstraint(SpringLayout.NORTH, scrollOut, 0, SpringLayout.NORTH, toBeConverted);
-		baseLayout.putConstraint(SpringLayout.WEST, scrollOut, 0, SpringLayout.WEST, out);
-		baseLayout.putConstraint(SpringLayout.SOUTH, scrollOut, 0, SpringLayout.SOUTH, toBeConverted);
-		baseLayout.putConstraint(SpringLayout.EAST, scrollOut, 0, SpringLayout.EAST, out);
-		baseLayout.putConstraint(SpringLayout.NORTH, in, 0, SpringLayout.NORTH, out);
-		baseLayout.putConstraint(SpringLayout.WEST, in, 10, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.EAST, in, -151, SpringLayout.WEST, out);
-		baseLayout.putConstraint(SpringLayout.NORTH, scrollIn, 6, SpringLayout.SOUTH, in);
-		baseLayout.putConstraint(SpringLayout.EAST, scrollIn, 300, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, out, -6, SpringLayout.NORTH, converted)
+        baseLayout.putConstraint(SpringLayout.WEST, in, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.WEST, scrollIn, 10, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, scrollIn, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, setTheme, 25, SpringLayout.EAST, scrollIn);
-		baseLayout.putConstraint(SpringLayout.SOUTH, setTheme, 0, SpringLayout.SOUTH, scrollIn);
-		baseLayout.putConstraint(SpringLayout.EAST, setTheme, 125, SpringLayout.EAST, scrollIn);
 	}
 	
 	private void setTextFieldProperties()
@@ -114,8 +112,8 @@ public class BinaryPanel extends JPanel
 		toBeConverted.setLineWrap(true);
 		out.setHorizontalAlignment(SwingConstants.CENTER);
 		in.setHorizontalAlignment(SwingConstants.CENTER);
-		scrollIn.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollOut.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollIn.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollOut.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	}
 	
 	private void setupListeners()
@@ -215,19 +213,13 @@ public class BinaryPanel extends JPanel
 	
 	public void formatButtons()
 	{
-		convertButton.setOpaque(true);
 		convertButton.setBorder(new LineBorder(Color.BLACK));
-		if(colorPanel != null)
-		{
-		convertButton.setBackground(colorPanel.getSecondaryThemeColor());
-		}
-		
-		setTheme.setOpaque(true);
 		setTheme.setBorder(new LineBorder(Color.BLACK));
 		if(colorPanel != null)
 		{
-		setTheme.setBackground(colorPanel.getSecondaryThemeColor());
+			colorPanel.changeComponentBackground(colorPanel.getButtons(this), colorPanel.getPrimaryThemeColor());
 		}
+		
 	}
 	
 	public void setConvertColor(Color color)
