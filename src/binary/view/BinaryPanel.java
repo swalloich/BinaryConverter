@@ -22,7 +22,6 @@ import binary.model.Binary;
 public class BinaryPanel extends JPanel
 {
 	private JButton convertButton;
-//	private JTextField binaryField;
 	private JTextArea toBeConverted;
 	private JTextArea converted;
 	private JLabel in;
@@ -42,7 +41,6 @@ public class BinaryPanel extends JPanel
 		this.myFrame = myframe;
 		this.baseController = baseController;
 		this.convertButton = new JButton("Convert");
-//		this.binaryField = new JTextField("Enter input here");
 		this.toBeConverted = new JTextArea();
 		this.converted = new JTextArea();
 		this.in = new JLabel("Input");
@@ -65,7 +63,6 @@ public class BinaryPanel extends JPanel
 	{
 		this.setLayout(baseLayout);
 		this.add(convertButton);
-//		this.add(binaryField);
 		this.add(in);
 		this.add(out);
 		this.add(scrollIn);
@@ -75,10 +72,11 @@ public class BinaryPanel extends JPanel
 	
 	private void setupLayout()
 	{
-
+		baseLayout.putConstraint(SpringLayout.NORTH, scrollOut, 6, SpringLayout.SOUTH, out);
+		baseLayout.putConstraint(SpringLayout.WEST, out, 0, SpringLayout.WEST, scrollOut);
+		baseLayout.putConstraint(SpringLayout.EAST, out, 0, SpringLayout.EAST, scrollOut);
 		baseLayout.putConstraint(SpringLayout.SOUTH, setTheme, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, setTheme, -25, SpringLayout.WEST, scrollOut);
-		baseLayout.putConstraint(SpringLayout.NORTH, scrollOut, 6, SpringLayout.SOUTH, out);
 		baseLayout.putConstraint(SpringLayout.WEST, scrollOut, 450, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, scrollOut, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, convertButton, -6, SpringLayout.WEST, scrollOut);
@@ -98,7 +96,7 @@ public class BinaryPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, converted, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.EAST, toBeConverted, -451, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, convertButton, 186, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, out, -6, SpringLayout.NORTH, converted)
+		baseLayout.putConstraint(SpringLayout.SOUTH, out, -6, SpringLayout.NORTH, converted);
         baseLayout.putConstraint(SpringLayout.WEST, in, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.WEST, scrollIn, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.WEST, setTheme, 25, SpringLayout.EAST, scrollIn);
@@ -119,21 +117,6 @@ public class BinaryPanel extends JPanel
 	
 	private void setupListeners()
 	{
-		
-//			public void actionPerformed(ActionEvent enter)
-//			{
-//				String input = binaryField.getText();
-//				if(!binary.binaryChecker(input))
-//				{
-//					converted.setText(binary.convertToBinary(input, input));
-//				}
-//				else
-//				{
-//					converted.setText(binary.convertFromBinary(input, input));
-//				}
-//				
-//			}
-		
 		toBeConverted.addKeyListener(new KeyListener()
 		{
 			public void keyTyped(KeyEvent e)
@@ -189,22 +172,6 @@ public class BinaryPanel extends JPanel
 				
 			}
 		});
-		
-//		binaryField.addActionListener(new ActionListener()
-//		{
-//			public void actionPerformed(ActionEvent clicked)
-//			{
-//				String input = binaryField.getText();
-//					if(!binary.binaryChecker(input) && !input.equals(""))
-//					{
-//						converted.setText(binary.convertToBinary(input, input));
-//					}
-//					else if(!input.equals(""))
-//					{
-//						converted.setText(binary.convertFromBinary(input, input));
-//					}
-//				}
-//		});
 	}
 	
 	private BinaryPanel getMe()

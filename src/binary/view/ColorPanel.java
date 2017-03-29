@@ -44,14 +44,13 @@ public class ColorPanel extends JPanel
 	private Color themeSecondary;
 	private JButton setPrimary;
 	private JPanel parentPanel;
+	@SuppressWarnings("unused")
 	private BinaryPanel binaryPanel;
 	private JButton setSecondary;
-//	private JButton temp;
 	private Color textColor;
 
 	public ColorPanel(BinaryController baseController, JPanel parentPanel, BinaryPanel binaryPanel)
 	{
-//		this.temp = new JButton("temporary");
 		this.binaryPanel = binaryPanel;
 		this.parentPanel = parentPanel;
 		this.colorLayout = new SpringLayout();
@@ -240,24 +239,9 @@ public class ColorPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				changeSecondary();
-				changeComponentBackground(getButtons(parentPanel), themePrimary);
-				binaryPanel.formatButtons();
+				changeComponentBackground(getButtons(parentPanel), themeSecondary);
 			}
 		});
-
-//		temp.addActionListener(new ActionListener()
-//		{
-//			public void actionPerformed(ActionEvent e)
-//			{
-//				System.out.println("PrRed " + primaryRedSlider.getValue());
-//				System.out.println("PrGr " + primaryGreenSlider.getValue());
-//				System.out.println("PrBl " + primaryBlueSlider.getValue());
-//				System.out.println("SecRed " + secondaryRedSlider.getValue());
-//				System.out.println("SecGr " + secondaryGreenSlider.getValue());
-//				System.out.println("SecBl " + secondaryBlueSlider.getValue());
-//			}
-//		});
 	}
 
 	private void setTextColor(int r, int g, int b, JButton button)
@@ -281,7 +265,6 @@ public class ColorPanel extends JPanel
 	{
 		setPrimaryColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue());
 		this.setPrimary.setBackground(themePrimary);
-//		setTextColor(primaryRedSlider, primaryGreenSlider, primaryBlueSlider, setPrimary);
 	}
 
 	private void secondarySliderStuff()
@@ -289,7 +272,6 @@ public class ColorPanel extends JPanel
 		setSecondaryColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(),
 				secondaryBlueSlider.getValue());
 		this.setSecondary.setBackground(themeSecondary);
-//		setTextColor(secondaryRedSlider, secondaryGreenSlider, secondaryBlueSlider, setSecondary);
 	}
 	
 	public List<JComponent> getSliders(final Container container)
@@ -327,14 +309,6 @@ public class ColorPanel extends JPanel
 			comp.setBackground(color);
 			comp.setOpaque(true);
 		}
-	}
-
-	private void changeSecondary()
-	{
-		changeComponentBackground(getSliders(this), themePrimary);
-		binaryPanel.setConvertColor(themeSecondary);
-		binaryPanel.setColorColor(themeSecondary);
-//		temp.setBackground(themeSecondary);
 	}
 
 	public Color getPrimaryThemeColor()
