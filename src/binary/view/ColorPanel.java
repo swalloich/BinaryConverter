@@ -138,6 +138,7 @@ public class ColorPanel extends JPanel
 		setTextColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(), secondaryBlueSlider.getValue(), setSecondary);
 		setTextColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue(), setPrimary);
 		setTextColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(), secondaryBlueSlider.getValue(), setSecondary);
+
 	}
 
 	private void setupLayout()
@@ -201,8 +202,6 @@ public class ColorPanel extends JPanel
 
 	private void setupListeners(JPanel thisPanel)
 	{
-		
-		
 		ChangeListener primarySlider = new ChangeListener()
 		{
 			public void stateChanged(ChangeEvent changed)

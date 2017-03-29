@@ -75,6 +75,7 @@ public class BinaryPanel extends JPanel
 	
 	private void setupLayout()
 	{
+
 		baseLayout.putConstraint(SpringLayout.SOUTH, setTheme, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, setTheme, -25, SpringLayout.WEST, scrollOut);
 		baseLayout.putConstraint(SpringLayout.NORTH, scrollOut, 6, SpringLayout.SOUTH, out);
