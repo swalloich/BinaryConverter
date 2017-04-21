@@ -30,10 +30,6 @@ public class Binary
 		return output;
 	}
 	
-	/*
-	 * I would suggest changing up the colors a bit, or allowing users to change
-	 * the color with some sort of option within the program.
-	 */
 	public String stringArrayToString(String[] input)
 	{
 		String output = "";
@@ -45,13 +41,11 @@ public class Binary
 		output = converted.toString();
 		return output;
 	}
-
-	public String convertFromBinary(String input)
+	
+	private String removeSpaces(String input)
 	{
-		String output = new String();
 		String removeSpaces = new String();
-		StringBuilder converted = new StringBuilder();
-
+		
 		for (int index = 0; index < input.length(); index++)
 		{
 			if (!input.substring(index, index + 1).equalsIgnoreCase(" ")
@@ -60,19 +54,27 @@ public class Binary
 				removeSpaces += input.charAt(index);
 			}
 		}
+		
+		return removeSpaces;
+	}
+//startAbstraction
+	public String convertFromBinary(String input)
+	{
+		String output = new String();
+		StringBuilder converted = new StringBuilder();
 
-		for (int index = 0; index < removeSpaces.length(); index++)
+		for (int index = 0; index < removeSpaces(input).length(); index++)
 		{
 			double temp = (index + 1) % 8;
 			if (temp == 0)
 			{
-				converted.append((char) Integer.parseInt(removeSpaces.substring((index + 1) - 8, (index + 1)), 2));
+				converted.append((char) Integer.parseInt(removeSpaces(input).substring((index + 1) - 8, (index + 1)), 2));
 			}
 		}
 		output = converted.toString();
 		return output;
 	}
-
+//endAbstraction
 	public boolean binaryChecker(String input)
 	{
 		boolean isBinary = true;
@@ -82,7 +84,8 @@ public class Binary
 					|| input.substring(index, index + 1).equals(" ") || input.substring(index, index + 1).equals("\n"))
 			{
 
-			} else
+			} 
+			else
 			{
 				isBinary = false;
 			}

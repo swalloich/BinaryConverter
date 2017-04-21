@@ -146,7 +146,7 @@ public class BinaryPanel extends JPanel
 				
 			}
 		});
-		
+		//startComplexity
 		convertButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent clicked)
@@ -156,20 +156,19 @@ public class BinaryPanel extends JPanel
 				{
 					converted.setText(binary.convertToBinary(input));
 				}
-				else if(!input.equals(""))
+				else if(binary.binaryChecker(input) && !input.equals(""))
 				{
 					converted.setText(binary.convertFromBinary(input));
 				}
 			}
 		});
-		
+		//endComplexity
 		setTheme.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				ColorFrame colorFrame = new ColorFrame(baseController,myFrame,getMe(),getMe());
 				colorPanel = colorFrame.getPanel();
-				
 			}
 		});
 	}

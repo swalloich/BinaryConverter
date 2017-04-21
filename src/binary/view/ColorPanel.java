@@ -133,10 +133,14 @@ public class ColorPanel extends JPanel
 		this.setSecondary.setOpaque(true);
 		this.setSecondary.setBorder(new LineBorder(Color.BLACK));
 		this.setSecondary.setBackground(themeSecondary);
-		setTextColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue(), setPrimary);
-		setTextColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(), secondaryBlueSlider.getValue(), setSecondary);
-		setTextColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue(), setPrimary);
-		setTextColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(), secondaryBlueSlider.getValue(), setSecondary);
+		setTextColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue(),
+				setPrimary);
+		setTextColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(), secondaryBlueSlider.getValue(),
+				setSecondary);
+		setTextColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue(),
+				setPrimary);
+		setTextColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(), secondaryBlueSlider.getValue(),
+				setSecondary);
 
 	}
 
@@ -199,6 +203,23 @@ public class ColorPanel extends JPanel
 
 	}
 
+	private void primarySliderStuff()
+	{
+		setPrimaryColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue());
+		this.setPrimary.setBackground(themePrimary);
+		setTextColor(themePrimary.getRed(), themePrimary.getGreen(), themePrimary.getBlue(), setPrimary);
+		// List<JComponent> temp = new ArrayList<JComponent>();
+		// temp = getButtons(parentPanel);
+		// changeTextColor(temp, themePrimary);
+	}
+
+	private void secondarySliderStuff()
+	{
+		setSecondaryColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(),
+				secondaryBlueSlider.getValue());
+		this.setSecondary.setBackground(themeSecondary);
+	}
+
 	private void setupListeners(JPanel thisPanel)
 	{
 		ChangeListener primarySlider = new ChangeListener()
@@ -227,11 +248,13 @@ public class ColorPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
+				List<JComponent> temp = new ArrayList<JComponent>();
+				temp = getButtons(parentPanel);
+
 				setBackground(themePrimary);
 				changeComponentBackground(getSliders(thisPanel), themePrimary);
 				parentPanel.setBackground(themePrimary);
-				System.out.println(primaryRedSlider.getBackground());
-				System.out.println(themePrimary);
+				changeTextColor(temp, themePrimary);
 			}
 		});
 
@@ -244,70 +267,63 @@ public class ColorPanel extends JPanel
 		});
 	}
 
-	private void setTextColor(int r, int g, int b, JButton button)
+	private void setTextColor(int r, int g, int b, JComponent button)
 	{
 		int average = ((r + g + b) / 3);
 
-		if ((average - 5 > 127 && average + 5 < 127) && (average - 5 > 127 && average + 5 < 127)
-				&& (average - 5 > 127 && average + 5 < 127))
+		if (average > 50)
 		{
 			setTextColorColor(Color.BLACK);
-		}
-		else
+		} else
 		{
-			setTextColorValues(r, g, b);
+			setTextColorColor(Color.WHITE);
 		}
 
-		this.setForeground(textColor);
+		button.setForeground(textColor);
 	}
 
-	private void primarySliderStuff()
-	{
-		setPrimaryColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue());
-		this.setPrimary.setBackground(themePrimary);
-	}
-
-	private void secondarySliderStuff()
-	{
-		setSecondaryColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(),
-				secondaryBlueSlider.getValue());
-		this.setSecondary.setBackground(themeSecondary);
-	}
-	
 	public List<JComponent> getSliders(final Container container)
 	{
 		Component[] components = container.getComponents();
 		List<JComponent> sliders = new ArrayList<JComponent>();
-		for(int index = 0; index < components.length; index++)
+		for (int index = 0; index < components.length; index++)
 		{
-			if(components[index] instanceof JSlider)
+			if (components[index] instanceof JSlider)
 			{
 				sliders.add((JComponent) components[index]);
 			}
 		}
 		return sliders;
 	}
-	
+
 	public List<JComponent> getButtons(final Container container)
 	{
 		Component[] components = container.getComponents();
 		List<JComponent> buttons = new ArrayList<JComponent>();
-		for(int index = 0; index < components.length; index++)
+		for (int index = 0; index < components.length; index++)
 		{
-			if(components[index] instanceof JButton)
+			if (components[index] instanceof JButton)
 			{
 				buttons.add((JComponent) components[index]);
 			}
 		}
 		return buttons;
 	}
-	
+
 	public void changeComponentBackground(List<JComponent> components, Color color)
 	{
-		for(JComponent comp : components)
+		for (JComponent comp : components)
 		{
 			comp.setBackground(color);
 			comp.setOpaque(true);
+		}
+	}
+
+	public void changeTextColor(List<JComponent> components, Color backgroundColor)
+	{
+		for (JComponent comp : components)
+		{
+			setTextColor(backgroundColor.getRed(), backgroundColor.getGreen(), backgroundColor.getBlue(), comp);
 		}
 	}
 
@@ -335,7 +351,7 @@ public class ColorPanel extends JPanel
 	{
 		textColor = new Color(r, g, b);
 	}
-	
+
 	public void setTextColorColor(Color color)
 	{
 		textColor = color;
