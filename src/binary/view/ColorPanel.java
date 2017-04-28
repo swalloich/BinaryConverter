@@ -79,9 +79,12 @@ public class ColorPanel extends JPanel
 		setupPanel();
 		setupLayout();
 		setupListeners(this);
-		formatButtons();
+		formatComponents();
 	}
 
+	/**
+	 * Adds components to the panel.
+	 */
 	private void setupPanel()
 	{
 		this.setLayout(colorLayout);
@@ -103,23 +106,31 @@ public class ColorPanel extends JPanel
 		this.add(setSecondary);
 	}
 
-	private void formatButtons()
+	/**
+	 * formats buttons and sliders
+	 */
+	private void formatComponents()
 	{
 		primaryRedSlider.setMinimum(0);
 		primaryRedSlider.setMaximum(255);
 		primaryRedSlider.setValue(200);
+		
 		primaryGreenSlider.setMinimum(0);
 		primaryGreenSlider.setMaximum(255);
 		primaryGreenSlider.setValue(200);
+		
 		primaryBlueSlider.setMinimum(0);
 		primaryBlueSlider.setMaximum(255);
 		primaryBlueSlider.setValue(200);
+		
 		secondaryRedSlider.setMinimum(0);
 		secondaryRedSlider.setMaximum(255);
 		secondaryRedSlider.setValue(200);
+		
 		secondaryGreenSlider.setMinimum(0);
 		secondaryGreenSlider.setMaximum(255);
 		secondaryGreenSlider.setValue(200);
+		
 		secondaryBlueSlider.setMinimum(0);
 		secondaryBlueSlider.setMaximum(255);
 		secondaryBlueSlider.setValue(200);
@@ -144,6 +155,9 @@ public class ColorPanel extends JPanel
 
 	}
 
+	/**
+	 * adds the constraints for ColorPanel.
+	 */
 	private void setupLayout()
 	{
 		colorLayout.putConstraint(SpringLayout.EAST, setPrimary, 0, SpringLayout.EAST, setSecondary);
@@ -193,26 +207,28 @@ public class ColorPanel extends JPanel
 		colorLayout.putConstraint(SpringLayout.NORTH, secondaryGreenSlider, 6, SpringLayout.SOUTH, secondaryRedSlider);
 		colorLayout.putConstraint(SpringLayout.WEST, secondaryGreenSlider, 0, SpringLayout.WEST, primaryRedSlider);
 		colorLayout.putConstraint(SpringLayout.WEST, secondaryRedSlider, 0, SpringLayout.WEST, primaryRedSlider);
-
+		
 		primaryRedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		primaryGreenLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		primaryBlueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		redLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		greenLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		blueLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
 	}
 
+	/**
+	 * Method for themePrimary listener.
+	 */
 	private void primarySliderStuff()
 	{
 		setPrimaryColor(primaryRedSlider.getValue(), primaryGreenSlider.getValue(), primaryBlueSlider.getValue());
 		this.setPrimary.setBackground(themePrimary);
 		setTextColor(themePrimary.getRed(), themePrimary.getGreen(), themePrimary.getBlue(), setPrimary);
-		// List<JComponent> temp = new ArrayList<JComponent>();
-		// temp = getButtons(parentPanel);
-		// changeTextColor(temp, themePrimary);
 	}
 
+	/**
+	 * Method for themeSecondary listener.
+	 */
 	private void secondarySliderStuff()
 	{
 		setSecondaryColor(secondaryRedSlider.getValue(), secondaryGreenSlider.getValue(),

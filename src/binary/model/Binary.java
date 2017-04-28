@@ -57,6 +57,7 @@ public class Binary
 		
 		return removeSpaces;
 	}
+
 //startAbstraction
 	public String convertFromBinary(String input)
 	{
@@ -75,6 +76,7 @@ public class Binary
 		return output;
 	}
 //endAbstraction
+	
 	public boolean binaryChecker(String input)
 	{
 		boolean isBinary = true;
