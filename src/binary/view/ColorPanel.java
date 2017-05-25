@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 
+import javax.accessibility.Accessible;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -264,7 +265,7 @@ public class ColorPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				List<JComponent> temp = new ArrayList<JComponent>();
+				List<Accessible> temp = new ArrayList<Accessible>();
 				temp = getButtons(parentPanel);
 
 				setBackground(themePrimary);
@@ -283,7 +284,7 @@ public class ColorPanel extends JPanel
 		});
 	}
 
-	private void setTextColor(int r, int g, int b, JComponent button)
+	private void setTextColor(int r, int g, int b, Accessible button)
 	{
 		int average = ((r + g + b) / 3);
 
@@ -295,49 +296,50 @@ public class ColorPanel extends JPanel
 			setTextColorColor(Color.WHITE);
 		}
 
-		button.setForeground(textColor);
+		((JComponent) button).setForeground(textColor);
 	}
 
-	public List<JComponent> getSliders(final Container container)
+	public List<Accessible> getSliders(final Container container)
 	{
 		Component[] components = container.getComponents();
-		List<JComponent> sliders = new ArrayList<JComponent>();
+		List<Accessible> sliders = new ArrayList<Accessible>();
 		for (int index = 0; index < components.length; index++)
 		{
 			if (components[index] instanceof JSlider)
 			{
-				sliders.add((JComponent) components[index]);
+				sliders.add((Accessible) components[index]);
 			}
 		}
 		return sliders;
 	}
 
-	public List<JComponent> getButtons(final Container container)
+	public List<Accessible> getButtons(final Container container)
 	{
 		Component[] components = container.getComponents();
-		List<JComponent> buttons = new ArrayList<JComponent>();
+		List<Accessible> buttons = new ArrayList<Accessible>();
 		for (int index = 0; index < components.length; index++)
 		{
 			if (components[index] instanceof JButton)
 			{
-				buttons.add((JComponent) components[index]);
+				buttons.add((Accessible) components[index]);
 			}
 		}
 		return buttons;
 	}
 
-	public void changeComponentBackground(List<JComponent> components, Color color)
+	public void changeComponentBackground(List<Accessible> components, Color color)
 	{
-		for (JComponent comp : components)
+		for (Accessible acc : components)
 		{
+			JComponent comp = (JComponent) acc;
 			comp.setBackground(color);
 			comp.setOpaque(true);
 		}
 	}
 
-	public void changeTextColor(List<JComponent> components, Color backgroundColor)
+	public void changeTextColor(List<Accessible> components, Color backgroundColor)
 	{
-		for (JComponent comp : components)
+		for (Accessible comp : components)
 		{
 			setTextColor(backgroundColor.getRed(), backgroundColor.getGreen(), backgroundColor.getBlue(), comp);
 		}
